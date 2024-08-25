@@ -3,8 +3,7 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.routing import Route, Host, Router
 from utils import settings as config
-import httpx, requests
-import json
+import httpx
 
 routing_hosts = config.routing_hosts
 
