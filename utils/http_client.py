@@ -3,7 +3,7 @@ import httpx
 
 
 class AbstractClient(ABC):
-    def send_request(
+    async def send_request(
             self,
             service: str,
             path: str,
@@ -34,8 +34,11 @@ class HttpxClient(AbstractClient):
             content, code = response.content, response.status_code
 
         except httpx.ConnectError:
-            code, content = httpx.codes.SERVICE_UNAVAILABLE
+            code = httpx.codes.SERVICE_UNAVAILABLE
+            content = "Service Unavailable"
+            
         except Exception as e:
+            print(e)            #TODO: logger
             code, content = 500, "Oops!! Something went wrong."
 
         return (content, code)

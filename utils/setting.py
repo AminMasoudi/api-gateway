@@ -12,7 +12,7 @@ class Settings:
             if setting.isupper():
                 setting_value = getattr(mod, setting)
                 setattr(self, setting, setting_value)
-        self.__call_client: HttpxClient
+        self.__call_client = HttpxClient()
         self.preprocessing()
 
     def preprocessing(self):

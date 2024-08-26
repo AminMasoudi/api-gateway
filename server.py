@@ -20,9 +20,10 @@ async def router(request: Request):
     service = routing_func(path=path, domain=host)      #<===== routing_func is a dependency
 
     # call a service
-    content, code = client.send_request(                #<==== client is a dependency
+    content, code = await client.send_request(                #<==== client is a dependency
         path=path,
         service=service,
+        method=request.method
     )
     return Response(content=content, status_code=code)
 
