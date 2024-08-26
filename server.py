@@ -3,35 +3,28 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.routing import Route, Host, Router
 from utils import settings as config
-import httpx
 
-routing_hosts = config.routing_hosts
+from utils.routing import router as routing_func
 
+client = config.call_client
 
 
 async def router(request: Request):
 
     path: str = "/" + request.path_params["path"]
     host = request.path_params["host"]
-    result = ""
 
-    for route in routing_hosts.get(host):
-        if path.startswith(route["path"]):
-            result = "http://"+ route["service"] + path
-            break
-    try:
-        response = httpx.request(
-            method=request.method,
-            url=result,
-            # headers=request.headers
-            )
-    except Exception as e:
-        print(e)
-    
-    return Response(
-        content=response.content,
-        status_code=response.status_code,
-        )
+    # routing
+
+    # FIXME: specify the protocol to call that backend 
+    service = routing_func(path=path, domain=host)      #<===== routing_func is a dependency
+
+    # call a service
+    content, code = client.send_request(                #<==== client is a dependency
+        path=path,
+        service=service,
+    )
+    return Response(content=content, status_code=code)
 
 
 routes = [Route("/{path:path}", router, methods=["POST", "GET"])]
