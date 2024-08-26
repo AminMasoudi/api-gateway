@@ -5,7 +5,6 @@ import uvicorn
 def main():
     os.environ.setdefault("SETTINGS","settings.dev")
     from utils import settings
-    
     uvicorn.run(
         app="server:app",
         port=settings.PORT,
