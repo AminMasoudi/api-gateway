@@ -7,3 +7,6 @@ admin:
 run: admin api-gateway
 	echo runing
 	
+test_app: export SETTINGS=settings.dev
+test_app:
+	pytest -v . 

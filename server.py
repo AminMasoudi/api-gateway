@@ -3,27 +3,32 @@ from starlette.requests import Request
 from starlette.responses import Response
 from starlette.routing import Route, Host, Router
 
-from utils import settings as config
-from utils.routing import router as routing_func
-
-client = config.call_client
+from utils.setting import settings
+from utils.routing import find_service
 
 
 async def router(request: Request):
-
+    """
+        in this function we have two dependency: `find_service` and `settings`
+        we can ignore `find_service`, but what about `settings`??
+        i cant use `async def router(request: Request, settings=Depends(settings)):` like FastAPI
+        soo
+        we ignore this one for now :)))
+    """
+    
     path: str = "/" + request.path_params["path"]
     host = request.path_params["host"]
     # routing
 
     # FIXME: specify the protocol to call that backend 
-    service = routing_func(path=path, domain=host)              #<===== routing_func is a dependency
+    service = find_service(maps=settings.url_maps, path=path, domain=host)
+
     # call a service
-    content, code = await client.send_request(                  #<==== client is a dependency
+    content, code = await settings.call_client.send_request(
         path=path,
         service=service,
         method=request.method,
     )
-
     return Response(content=content, status_code=code)
 
 
