@@ -17,7 +17,7 @@ async def router(request: Request):
 
     # FIXME: specify the protocol to call that backend 
     service = routing_func(path=path, domain=host)              #<===== routing_func is a dependency
-
+    print(service)
     # call a service
     content, code = await client.send_request(                  #<==== client is a dependency
         path=path,
