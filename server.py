@@ -10,17 +10,16 @@ client = config.call_client
 
 
 async def router(request: Request):
+
     path: str = "/" + request.path_params["path"]
     host = request.path_params["host"]
     # routing
 
-    # FIXME: specify the protocol to call that backend
-    service = routing_func(
-        path=path, domain=host
-    )  # <===== routing_func is a dependency
+    # FIXME: specify the protocol to call that backend 
+    service = routing_func(path=path, domain=host)              #<===== routing_func is a dependency
 
     # call a service
-    content, code = await client.send_request(  # <==== client is a dependency
+    content, code = await client.send_request(                  #<==== client is a dependency
         path=path,
         service=service,
         method=request.method,
@@ -31,9 +30,12 @@ async def router(request: Request):
 
 routes = [
     Route("/{path:path}", router, methods=["POST", "GET"]),
-]
+    ]
 
 routes = Router(routes)
 routes = [Host("{host}", routes, name="site_api")]
 
-app = Starlette(debug=True, routes=routes)
+app = Starlette(
+    debug=True,
+    routes=routes
+    )
