@@ -3,6 +3,7 @@ import importlib
 from functools import lru_cache
 
 from utils.http_client import AbstractClient, HttpxClient
+from model.database import get_db
 class Settings:
     def __init__(self) -> None:
         settings_module = os.environ.get("SETTINGS")
@@ -12,7 +13,9 @@ class Settings:
             if setting.isupper():
                 setting_value = getattr(mod, setting)
                 setattr(self, setting, setting_value)
+
         self.__call_client = HttpxClient()
+        self.__db = get_db(debug=True)
         self.preprocessing()
 
     def preprocessing(self):
@@ -36,5 +39,9 @@ class Settings:
         assert isinstance(Client, AbstractClient)
         self.__call_client = Client
 
-
+    @property
+    def db(self):
+        return self.__db
+    
+    
 settings = Settings()

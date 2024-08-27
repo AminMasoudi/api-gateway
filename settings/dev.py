@@ -9,3 +9,6 @@ URL_MAPS = {
 LOGGING = {}
 
 PORT = 8000
+
+ADMIN = True
+ADMIN_PORT = 5000
