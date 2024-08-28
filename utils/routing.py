@@ -8,3 +8,4 @@ def find_service(maps: UrlMaps, path: str, domain: str):
                 len(path) == len(url["path"]) or path[len(url["path"])] == "/"
             ):
                 return url["service"]
+    raise Exception(f"cant find match for {domain}{path}")
