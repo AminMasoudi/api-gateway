@@ -16,7 +16,6 @@ class Depends:
 class App(Starlette):
     def __init__(
         self: AppType,
-        settings: Settings,
         dependency: dict[typing.Callable, typing.Callable] = {},
         debug: bool = False,
         routes: typing.Sequence[BaseRoute] | None = None,
@@ -26,9 +25,7 @@ class App(Starlette):
         on_shutdown: typing.Sequence[typing.Callable[[], typing.Any]] | None = None,
         lifespan: Lifespan[AppType] | None = None,
     ) -> None:
-        assert isinstance(settings, Settings)
         self.dependency = dependency
-        self.settings = settings
         if routes is None:
             routes = []
             routes = Router(routes)
