@@ -10,3 +10,6 @@ run: admin api-gateway
 test_app: export SETTINGS=settings.dev
 test_app:
 	pytest -v . 
+
+tear_down:
+	killall python
