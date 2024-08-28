@@ -5,7 +5,7 @@ URL_MAPS = {
         {"path": "/api-admin", "service": "127.0.0.1:5000"},
         {"path": "", "service": "127.0.0.1:5000"},
     ],
-    "localhost": [{"path": "", "service": "localhost:8080"}],
+    "testserver": [{"path": "", "service": "localhost:8080"}],
 }
 LOGGING = {}
 

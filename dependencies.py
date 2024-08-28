@@ -10,6 +10,7 @@ import os
 
 @lru_cache
 def get_db(debug=False):
+    # FIXME: get config from settings
 
     if debug:
        DB = sa.create_engine("sqlite:///db.sqlite3")
