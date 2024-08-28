@@ -2,40 +2,21 @@
 from utils.http_client import HttpxClient
 import sqlalchemy as sa
 from sqlalchemy import URL
-from sqlalchemy.orm import sessionmaker
 from functools import lru_cache
 from model import Base
-import os
-
+from utils import settings
 
 @lru_cache
 def get_db(debug=False):
-    # FIXME: get config from settings
-
-    if debug:
-       DB = sa.create_engine("sqlite:///db.sqlite3")
-
-    else:
-        DB_conf = {
-            "drivername":"mysql+pymysql",
-            "database": os.environ.get("MYSQL_DB"),
-            "host":os.environ.get("DB_URL", "mysql"),
-            "password":os.environ.get("MYSQL_PASSWORD"),
-            "port":int(os.environ.get("MYSQL_PORT", "3306")),
-            "username":os.environ.get("MYSQL_USER"),
-            }
-        DB = db_connection(**DB_conf)
-
-    Base.metadata.create_all(DB)
-    Session = sessionmaker(DB)
-    return Session
-
- 
-def db_connection(**kwargs):
-    return sa.create_engine(URL.create(
-        **kwargs
+    DB_conf = settings.db_conf
+    engine = sa.create_engine(URL.create(
+        **DB_conf
     ))
 
+    Base.metadata.create_all(engine)
+    return engine
+
+ 
 
 @lru_cache
 def get_call_client():
