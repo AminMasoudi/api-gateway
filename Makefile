@@ -10,6 +10,7 @@ run: admin api-gateway
 test_app: export SETTINGS=settings.test
 test_app:
 	pytest -v . 
+	rm test.sqlite3
 
 tear_down:
 	killall python
