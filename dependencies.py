@@ -1,15 +1,15 @@
-
-from utils.http_client import HttpxClient
-import sqlalchemy as sa
-from sqlalchemy import URL
 from functools import lru_cache
-from model import Base
+
+import sqlalchemy as sa
+
+from models import Base
 from utils import settings
+from utils.http_client import HttpxClient
 
 @lru_cache
-def get_db(debug=False):
+def get_db():
     DB_conf = settings.db_conf
-    engine = sa.create_engine(URL.create(
+    engine = sa.create_engine(sa.URL.create(
         **DB_conf
     ))
 

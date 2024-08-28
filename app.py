@@ -1,4 +1,4 @@
-from functools import wraps, lru_cache
+from functools import wraps
 import typing
 
 from starlette.applications import Starlette, AppType, Middleware, BaseRoute
@@ -41,7 +41,6 @@ class App(Starlette):
             lifespan,
         )
 
-    @lru_cache
     def replace_dependency(self, arg):
         if arg.dependency not in self.dependency:
             self.dependency[arg.dependency] = arg.dependency

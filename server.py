@@ -6,7 +6,7 @@ from starlette_admin.contrib.sqla import Admin, ModelView
 
 from app import App, Depends
 from dependencies import get_call_client, get_db
-from model.models import Backend
+from models import Backend
 from utils.setting import settings
 from utils.routing import find_service
 from utils.http_client import AbstractClient
@@ -43,5 +43,3 @@ async def router(request: Request,
         method=request.method,
     )
     return Response(content=content, status_code=code)
-
-
