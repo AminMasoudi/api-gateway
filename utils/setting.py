@@ -31,8 +31,7 @@ class Settings:
         return self.__url_maps
 
     @property
-    def db(self):
-        return self.__db
-
+    def db_conf(self):
+        return self.DATABASE
 
 settings = Settings()

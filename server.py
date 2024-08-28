@@ -1,15 +1,23 @@
 
 from starlette.requests import Request
 from starlette.responses import Response
+from starlette.applications import Starlette
+from starlette_admin.contrib.sqla import Admin, ModelView
 
 from app import App, Depends
+from dependencies import get_call_client, get_db
+from model.models import Backend
 from utils.setting import settings
 from utils.routing import find_service
 from utils.http_client import AbstractClient
-from dependencies import get_call_client
 
 
 app = App(debug=True)
+
+admin_app = Starlette()  # or app = FastAPI()
+admin = Admin(get_db(), title="Admin", base_url="/api-admin")
+admin.add_view(ModelView(Backend, icon="fas fa-server"))
+admin.mount_to(admin_app)
 
 
 @app.route(

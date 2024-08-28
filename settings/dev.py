@@ -13,3 +13,9 @@ PORT = 8000
 
 ADMIN = True
 ADMIN_PORT = 5000
+
+DATABASE = {
+    "drivername": "sqlite",
+    "database": "db.sqlite3",
+}
+
