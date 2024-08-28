@@ -7,7 +7,8 @@ class AbstractClient(ABC):
             self,
             service: str,
             path: str,
-            protocol:str
+            protocol:str,
+            *args, **kwargs
             ):
         ...
 
@@ -42,3 +43,9 @@ class HttpxClient(AbstractClient):
             code, content = 500, "Oops!! Something went wrong."
 
         return (content, code)
+    
+
+class MockClient(AbstractClient):
+    async def send_request(self, *args, **kwargs):
+        print("Just Mocking")
+        return ("mock", 200)
