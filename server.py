@@ -37,9 +37,10 @@ async def router(request: Request,
     service = find_service(maps=url_maps, path=path, domain=host)
 
     # call a service
-    content, code = await call_client.send_request(
+    content, code, headers = await call_client.send_request(
         path=path,
         service=service,
         method=request.method,
+        headers=request.headers,
     )
-    return Response(content=content, status_code=code)
+    return Response(content=content, status_code=code, headers=headers)
