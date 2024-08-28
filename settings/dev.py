@@ -5,11 +5,15 @@ URL_MAPS = {
         {"path": "/api-admin", "service": "127.0.0.1:5000"},
         {"path": "", "service": "127.0.0.1:5000"},
     ],
-    "localhost": [{"path": "", "service": "localhost:8080"}],
+
 }
-LOGGING = {}
+
 
 PORT = 8000
-
-ADMIN = True
 ADMIN_PORT = 5000
+
+DATABASE = {
+    "drivername": "sqlite",
+    "database": "db.sqlite3",
+}
+

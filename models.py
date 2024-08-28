@@ -1,11 +1,10 @@
-from sqlalchemy.orm import DeclarativeBase, MappedAsDataclass
+from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.schema import PrimaryKeyConstraint
 
 
 class Base(
-    DeclarativeBase,
-    MappedAsDataclass
+    DeclarativeBase
     ):
     ...
 

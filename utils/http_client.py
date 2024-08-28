@@ -3,12 +3,16 @@ import httpx
 
 
 class AbstractClient(ABC):
+    @abstractmethod
     async def send_request(
             self,
-            service: str,
-            path: str,
-            protocol:str
+            service,
+            path,
+            protocol:str="http",
+            follow_redirects = True,
+            **data
             ):
+            
         ...
 
 class HttpxClient(AbstractClient):
@@ -42,3 +46,23 @@ class HttpxClient(AbstractClient):
             code, content = 500, "Oops!! Something went wrong."
 
         return (content, code)
+    
+
+class MockClient(AbstractClient):
+    requests: list = []
+    async def send_request(
+            self,
+            service,
+            path,
+            protocol:str="http",
+            follow_redirects = True,
+            **data
+            ):
+        self.requests.append({
+            "service": service,
+            "path": path,
+            "protocol": protocol,
+            "follow_redirects": follow_redirects,
+            **data
+        })
+        return ("mock", 200)
