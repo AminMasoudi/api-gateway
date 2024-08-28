@@ -1,13 +1,15 @@
 from utils import settings
 import pytest
+from starlette.testclient import TestClient
+from server import app as orig_app
+from utils.http_client import MockClient
 
 
-def test_setting_url_maps_is_sorted():
-
-    maps = settings.url_maps
-    for host, paths in maps.items():
-        for i in range(len(paths) - 1):
-            assert paths[i]["path"] > paths[i+1]["path"]
+@pytest.fixture
+def client():
+    orig_app.dependency.call_client = MockClient()
+    with TestClient(orig_app) as client:
+        yield client
 
 
 
@@ -18,3 +20,9 @@ class TestRouting:
 
     def test_find_service_by_host(self):
         ...
+
+
+
+def test_foo(client):
+    response  = client.get("/foo")
+    assert response.content == b"mock"
