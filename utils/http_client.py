@@ -28,6 +28,10 @@ class HttpxClient(AbstractClient):
             
         url = protocol + "://" + service + path
         headers = None
+        if "headers" in data and "content-length" in data["headers"]:
+            req_headers = dict(data["headers"])
+            req_headers.pop("content-length")
+            data["headers"] = req_headers
         try:
             async with httpx.AsyncClient() as Client:
                 response = await Client.request(
