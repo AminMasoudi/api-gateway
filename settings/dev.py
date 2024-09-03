@@ -10,10 +10,4 @@ URL_MAPS = {
 
 
 PORT = 8000
-ADMIN_PORT = 5000
-
-DATABASE = {
-    "drivername": "sqlite",
-    "database": "db.sqlite3",
-}
 

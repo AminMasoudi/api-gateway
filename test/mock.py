@@ -9,18 +9,6 @@ from utils.http_client import MockClient
 from models import Base
 
 
-@pytest.fixture()
-def mock_db():
-    DB_conf = {
-        "drivername": "sqlite",
-        "database": "test.sqlite3",
-    }
-    engine = sa.create_engine(sa.URL.create(**DB_conf))
-    Base.metadata.create_all(engine)
-    yield engine
-    Base.metadata.drop_all(engine)
-    os.remove("test.sqlite3")
-
 
 @pytest.fixture()
 def mock_call_client():
