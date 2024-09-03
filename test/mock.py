@@ -1,12 +1,12 @@
 import os
 
 import pytest
-import sqlalchemy as sa
+# import sqlalchemy as sa
 from starlette.testclient import TestClient
 
 from server import app as orig_app, get_call_client
 from utils.http_client import MockClient
-from models import Base
+# from models import Base
 
 
 

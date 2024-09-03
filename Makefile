@@ -1,10 +1,10 @@
 api-gateway:
-	python main.py &
+	python main.py
 
 
 deploy: export SETTINGS=settings.prod
 deploy: test_app api-gateway
-	echo deploy
+	@echo deploy
 	
 test_app: export SETTINGS=settings.test
 test_app:
