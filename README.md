@@ -11,6 +11,7 @@ check out [RedHat docs](https://www.redhat.com/en/topics/api/what-does-an-api-ga
 - **Routing**: Directs incoming requests to the appropriate backend services.
 
 ## Planned Features
+- **CI/CD**: Test and build image on push or merge with main.  
 - **Dynamic Middleware:** Allows for dynamic addition and removal of middleware.
 - **Firewall:** Basic firewall functionalities to secure the gateway.
 - **Database Configuration:** Configures and manages database connections.
