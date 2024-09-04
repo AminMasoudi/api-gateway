@@ -7,7 +7,13 @@ def main():
     os.environ.setdefault("SETTINGS", "settings.dev")
     from utils import settings
 
-    uvicorn.run(app="server:app", port=settings.PORT, reload=True, host="0.0.0.0")
+    uvicorn.run(
+            app="server:app", 
+            port=settings.PORT, 
+            reload=settings.RELOAD if settings.RELOAD is not None else True, 
+            host="0.0.0.0",
+            workers=settings.WORKERS or 1
+            )
 
 
 
