@@ -13,8 +13,9 @@ you can use docker, or run it from source code
 docker run -p <your-server-port>:<the-port-thst-you-defined-in-prod.py> -v ./settings/:/app/settings aminmasoudii/api-gateway
 ```
 **Notice:** when you useing docker ypu should use DNS and/or hostnames like Kubernetes or useing ip's. for internall services they start with 172 
+
 ## TODO:
-- [ ] some debug for Docker image
-- [ ] observations
-- [ ] add db and admin pannel
+- [ ] Cookies and CSRF :)
+- [ ] Observations
+- [ ] Add db and admin pannel
 - [ ] firwall and ...
