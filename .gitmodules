@@ -1,0 +1,6 @@
+[submodule "api-gateway-master"]
+	path = api-gateway-master
+	url = git@github.com:AminMasoudi/api-gateway-master.git
+[submodule "api-gateway-worker"]
+	path = api-gateway-worker
+	url = git@github.com:AminMasoudi/api-gateway-worker.git
